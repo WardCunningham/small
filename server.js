@@ -10,6 +10,7 @@ let routes = {
   "/wind-river.json": wind_river,
   "/page-counter.json": page_counter,
   "/system/sitemap.json": sitemap,
+  "/system/countmap.json": countmap,
   "/": home
 }
 
@@ -19,11 +20,12 @@ addEventListener("fetch", (event) => event.respondWith(handle(event.request)))
 
 function handle(request) {
   let { pathname, search, origin } = new URL(request.url)
-  let counter = count[pathname] = count[pathname] || [0]
-  counter[0]++
+  count[pathname] = count[pathname] || 0
+  count[pathname]++
   try {
     return routes[pathname](search, origin)
   } catch (err) {
+    console.log(pathname)
     console.log(err)
     return new Response(`<pre>${err}</pre>`, {status:500})
   }
@@ -55,6 +57,10 @@ function sitemap() {
   return new Response(JSON.stringify(json,null,2), { headers })
 }
 
+function countmap() {
+  return new Response(JSON.stringify(count,null,2), { headers })
+}
+
 function wind_river() {
   let json = page("Wind River", [
     "A lat/lon confluence near Mt. Saint Helens.",
@@ -65,7 +71,7 @@ function wind_river() {
 }
 
 function page_counter() {
-  let rows = Object.keys(count).map(k => `<tr><td>${k}<td>${count[k]}`).join("")
+  let rows = Object.keys(count).map(k => `<tr><td>${count[k]}<td>${k}`).join("")
   let json = page("Page Counter", [
     "The server counts each time it serves any content. We are most interested in when this count resets.",
     item('html', {text:`<table>${rows}</table>`}),
