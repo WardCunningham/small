@@ -2,16 +2,25 @@
 
 import { page, item } from "./page.js"
 
+let count = {}
+
+let routes = {
+  "/favicon.ico": flag,
+  "/favicon.png": flag,
+  "/wind-river.json": wind_river,
+  "/page-counter.json": page_counter,
+  "/system/sitemap.json": sitemap,
+  "/": home
+}
+
+let headers = { "content-type": "application/json", "Access-Control-Allow-Origin": "*" }
+
 addEventListener("fetch", (event) => event.respondWith(handle(event.request)))
 
 function handle(request) {
-  let routes = {
-    "/favicon.ico": flag,
-    "/favicon.png": flag,
-    "/wind-river.json": wind_river,
-    "/": home
-  }
   let { pathname, search, origin } = new URL(request.url)
+  let counter = count[pathname] = count[pathname] || [0]
+  counter[0]++
   try {
     return routes[pathname](search, origin)
   } catch (err) {
@@ -36,11 +45,31 @@ function home() {
   return new Response(text, { headers: { "content-type": "text/html" } })
 }
 
+function sitemap() {
+  let date = Date.now()
+  let synopsis = "A page constructed by a foreign federated server."
+  let json = [
+    {"slug": "wind-river", "title": "Wind River", date, synopsis},
+    {"slug": "page-counter", "title": "Page Counter", date, synopsis},
+  ]
+  return new Response(JSON.stringify(json,null,2), { headers })
+}
+
 function wind_river() {
   let json = page("Wind River", [
     "A lat/lon confluence near Mt. Saint Helens.",
     item('map', {text:'46,-122', zoom:10}),
     "See [[Aerial Map]]"
   ])
-  return new Response(JSON.stringify(json,null,2), { headers: { "content-type": "application/json", "Access-Control-Allow-Origin": "*"}})
+  return new Response(JSON.stringify(json,null,2), { headers })
+}
+
+function page_counter() {
+  let rows = Object.keys(count).map(k => `<tr><td>${k}<td>${count[k]}`).join("")
+  let json = page("Page Counter", [
+    "The server counts each time it serves any content. We are most interested in when this count resets.",
+    item('html', {text:`<table>${rows}</table>`}),
+    "See [[Aerial Map]]"
+  ])
+  return new Response(JSON.stringify(json,null,2), { headers })
 }
