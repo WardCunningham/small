@@ -8,7 +8,7 @@ function handle(request) {
   let routes = {
     "/favicon.ico": flag,
     "/wind-river.json": wind_river,
-    "/": hello
+    "/": home
   }
   let { pathname, search, origin } = new URL(request.url)
   try {
@@ -24,12 +24,15 @@ function handle(request) {
 
 function flag() {
   let text = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🎅</text></svg>`
-  return new Response(text, { headers: { "content-type": "image/svg+xml" } })
+  return new Response(text, { headers: { "content-type": "image/svg+xml", "Access-Control-Allow-Origin": "*" } })
 }
 
-function hello() {
-  let text = `hello world`
-  return new Response(text, { headers: { "content-type": "text/plain" } })
+function home() {
+  let text = `<h1><img width=32px src=/favicon.ico> Federated Wiki</h1>
+    <p>Static Edge Pages. <a href=http://small.fed.wiki/static-edge-pages.html> page </a></p>
+    <p>Experimental Rendering. <a href=http://small.fed.wiki/assets/exp/node.html#wind-river@small.deno.dev> site </a></p>
+    <p>Traditional Rendering. <a href=http://fed.wiki/view/small.deno.dev/wind-river> site </a></p>`
+  return new Response(text, { headers: { "content-type": "text/html" } })
 }
 
 function wind_river() {
@@ -38,5 +41,5 @@ function wind_river() {
     item('map', {text:'46,-122', zoom:10}),
     "See [[Aerial Map]]"
   ])
-  return new Response(JSON.stringify(json,null,2), { headers: { "content-type": "application/json"}})
+  return new Response(JSON.stringify(json,null,2), { headers: { "content-type": "application/json", "Access-Control-Allow-Origin": "*"}})
 }
