@@ -32,7 +32,7 @@ function home() {
   let text = `<h1><img width=32px src=/favicon.ico> Federated Wiki</h1>
     <p>Static Edge Pages. <a href=http://small.fed.wiki/static-edge-pages.html> page </a></p>
     <p>Experimental Rendering. <a href=http://small.fed.wiki/assets/exp/node.html#wind-river@small.deno.dev> site </a></p>
-    <p>Traditional Rendering. <a href=https://eu.fed.wiki/view/small.deno.dev/wind-river> site </a></p>`
+    <p>Traditional Rendering. <a href=https://eu.wiki.org/small.deno.dev/wind-river> site </a></p>`
   return new Response(text, { headers: { "content-type": "text/html" } })
 }
 
