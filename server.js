@@ -9,6 +9,7 @@ let routes = {
   "/favicon.png": flag,
   "/wind-river.json": wind_river,
   "/page-counter.json": page_counter,
+  "/hello-chicago.json": chicago,
   "/system/sitemap.json": sitemap,
   "/system/countmap.json": countmap,
   "/": home
@@ -53,6 +54,7 @@ function sitemap() {
   let json = [
     {"slug": "wind-river", "title": "Wind River", date, synopsis},
     {"slug": "page-counter", "title": "Page Counter", date, synopsis},
+    {"slug": "hello-chicago", "title": "Hello, Chicago", date, synopsis},
   ]
   return new Response(JSON.stringify(json,null,2), { headers })
 }
@@ -75,6 +77,16 @@ function page_counter() {
   let json = page("Page Counter", [
     "The server counts each time it serves any content. We are most interested in when this count resets.",
     item('html', {text:`<table>${rows}</table>`}),
+    "See [[Aerial Map]]"
+  ])
+  return new Response(JSON.stringify(json,null,2), { headers })
+}
+
+function chicago() {
+  const latlon = () => [41.6 + Math.random()/2, -88.14 + Math.random()/2].join(",")
+  let json = page("Hello, Chicago", [
+    "We choose a suburban locaction at random.",
+    item('map', {text:latlon(), zoom:12}),
     "See [[Aerial Map]]"
   ])
   return new Response(JSON.stringify(json,null,2), { headers })
