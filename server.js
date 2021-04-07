@@ -10,6 +10,7 @@ let routes = {
   "/wind-river.json": wind_river,
   "/page-counter.json": page_counter,
   "/hello-chicago.json": chicago,
+  "/hello-portland.json": portland,
   "/system/sitemap.json": sitemap,
   "/system/countmap.json": countmap,
   "/": home
@@ -55,6 +56,7 @@ function sitemap() {
     {"slug": "wind-river", "title": "Wind River", date, synopsis},
     {"slug": "page-counter", "title": "Page Counter", date, synopsis},
     {"slug": "hello-chicago", "title": "Hello, Chicago", date, synopsis},
+    {"slug": "hello-portland", "title": "Hello, Portland", date, synopsis},
   ]
   return new Response(JSON.stringify(json,null,2), { headers })
 }
@@ -67,7 +69,7 @@ function wind_river() {
   let json = page("Wind River", [
     "A lat/lon confluence near Mt. Saint Helens.",
     item('map', {text:'46,-122', zoom:10}),
-    "See [[Aerial Map]]"
+    "See [[Aerial Map]], [[Topo Map]]"
   ])
   return new Response(JSON.stringify(json,null,2), { headers })
 }
@@ -76,8 +78,7 @@ function page_counter() {
   let rows = Object.keys(count).map(k => `<tr><td>${count[k]}<td>${k}`).join("")
   let json = page("Page Counter", [
     "The server counts each time it serves any content. We are most interested in when this count resets.",
-    item('html', {text:`<table>${rows}</table>`}),
-    "See [[Aerial Map]]"
+    item('html', {text:`<table>${rows}</table>`})
   ])
   return new Response(JSON.stringify(json,null,2), { headers })
 }
@@ -87,7 +88,20 @@ function chicago() {
   let json = page("Hello, Chicago", [
     "We choose a suburban locaction at random.",
     item('map', {text:latlon(), zoom:12}),
-    "See [[Aerial Map]]"
+    "See [[Aerial Map]], [[Topo Map]]"
+  ])
+  return new Response(JSON.stringify(json,null,2), { headers })
+}
+
+// 45.4769396, -122.7457809
+// 45.5428628, -122.6105118
+
+function portland() {
+  const latlon = () => [45.48 + Math.random()/2, -122.8 + Math.random()/2].join(",")
+  let json = page("Hello, Portland", [
+    "We choose a suburban locaction at random.",
+    item('map', {text:latlon(), zoom:12}),
+    "See [[Aerial Map]], [[Topo Map]]"
   ])
   return new Response(JSON.stringify(json,null,2), { headers })
 }
