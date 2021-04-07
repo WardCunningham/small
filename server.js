@@ -42,10 +42,12 @@ function flag() {
 }
 
 function home() {
+  const link = (label, site) => `<p>${label}. <a href=${site} target=_blank> site </a></p>`
   let text = `<h1><img width=32px src=/favicon.ico> Federated Wiki</h1>
-    <p>Static Edge Pages. <a href=http://small.fed.wiki/static-edge-pages.html> page </a></p>
-    <p>Experimental Rendering. <a href=http://small.fed.wiki/assets/exp/node.html#wind-river@small.deno.dev> site </a></p>
-    <p>Traditional Rendering. <a href=https://eu.wiki.org/view/recent-changes/small.deno.dev/wind-river> site </a></p>`
+    ${link('Static Edge Pages','http://small.fed.wiki/static-edge-pages.html')}
+    ${link('Experimental Rendering','http://small.fed.wiki/assets/exp/node.html#wind-river@small.deno.dev')}
+    ${link('Traditional Rendering','https://eu.wiki.org/view/recent-changes/small.deno.dev/wind-river')}
+  `
   return new Response(text, { headers: { "content-type": "text/html" } })
 }
 
