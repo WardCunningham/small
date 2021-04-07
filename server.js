@@ -90,6 +90,7 @@ function chicago() {
   let json = page("Hello, Chicago", [
     "We choose a suburban locaction at random.",
     item('map', {text:latlon(), zoom:12}),
+    "More [[Hello, Chicago]]",
     "See [[Aerial Map]], [[Topo Map]]"
   ])
   return new Response(JSON.stringify(json,null,2), { headers })
@@ -104,6 +105,7 @@ function portland() {
   let json = page("Hello, Portland", [
     "We choose a suburban locaction at random.",
     item('map', {text, zoom:12}),
+    "More [[Hello, Portland]]",
     "See [[Aerial Map]], [[Topo Map]]"
   ])
   return new Response(JSON.stringify(json,null,2), { headers })
