@@ -99,10 +99,11 @@ function chicago() {
 // 45.5428628, -122.6105118
 
 function portland() {
-  const latlon = () => [45.48 + Math.random()/2, -122.8 + Math.random()/2].join(",")
+  const rn = (lo,hi) => lo + Math.random()*(hi-lo)
+  let text = [rn(45.477, 45.543),rn(-122.75, -122.61)].join(',')
   let json = page("Hello, Portland", [
     "We choose a suburban locaction at random.",
-    item('map', {text:latlon(), zoom:12}),
+    item('map', {text, zoom:12}),
     "See [[Aerial Map]], [[Topo Map]]"
   ])
   return new Response(JSON.stringify(json,null,2), { headers })
