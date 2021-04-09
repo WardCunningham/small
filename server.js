@@ -88,7 +88,7 @@ function page_counter() {
 function chicago() {
   const latlon = () => [41.6 + Math.random()/2, -88.14 + Math.random()/2].join(",")
   let json = page("Hello, Chicago", [
-    "We choose a suburban locaction at random.",
+    "We choose a suburban location at random.",
     item('map', {text:latlon(), zoom:12}),
     "More [[Hello, Chicago]]",
     "See [[Aerial Map]], [[Topo Map]]"
@@ -103,7 +103,7 @@ function portland() {
   const rn = (lo,hi) => lo + Math.random()*(hi-lo)
   let text = [rn(45.477, 45.543),rn(-122.75, -122.61)].join(',')
   let json = page("Hello, Portland", [
-    "We choose a suburban locaction at random.",
+    "We choose a suburban location at random.",
     item('map', {text, zoom:12}),
     "More [[Hello, Portland]]",
     "See [[Aerial Map]], [[Topo Map]]"
