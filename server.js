@@ -37,8 +37,16 @@ function handle(request) {
 // https://unicode.org/emoji/charts/full-emoji-list.html
 
 function flag() {
-  let text = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">🎅</text></svg>`
-  return new Response(text, { headers: { "content-type": "image/svg+xml", "Access-Control-Allow-Origin": "*" } })
+  let text = `<svg width="32" height="32" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="g2" x1=".2" y1="0" x2=".8" y2="1">
+      <stop offset="0%" stop-color="cornflowerblue"/>
+      <stop offset="100%" stop-color="gold"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="0" width="32" height="32" fill="url(#g2)"/>
+ </svg>`
+ return new Response(text, { headers: { "content-type": "image/svg+xml", "Access-Control-Allow-Origin": "*" } })
 }
 
 function home() {
