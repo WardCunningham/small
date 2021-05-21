@@ -28,10 +28,10 @@ function story (items) {
   )
 }
 
-function page (title, items) {
+function page (title, items, site='small.fed.wiki') {
   let page = {title, story:story(items)}
   let item = JSON.parse(JSON.stringify(page))
-  page.journal = [action('create',{item})]
+  page.journal = [action('create',{item}),action('fork',{site})]
   return page
 }
 

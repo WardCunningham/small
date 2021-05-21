@@ -13,6 +13,7 @@ let routes = {
   "/hello-portland.json": portland,
   "/system/sitemap.json": sitemap,
   "/system/countmap.json": countmap,
+  "/test-link-click.json": test_link_click,
   "/": home
 }
 
@@ -116,5 +117,32 @@ function portland() {
     "More [[Hello, Portland]]",
     "See [[Aerial Map]], [[Topo Map]]"
   ])
+  return new Response(JSON.stringify(json,null,2), { headers })
+}
+
+function test_link_click() {
+  let json = page("Test Link Click",[
+    "We explore the definition of functional tests in wiki pages where specific features can be present or invoked by pragmas that begin with ►.",
+    "We click to browse starting with [[How To Wiki]].",
+    "Sites have default pages that are always there if not part of the sitemap. Here we launch into standard documentation.",
+    "► click How To Wiki",
+    "We click through to newer documentation brought into the neighborhood with collaborative links.",
+    "► click Field Guide to the Federation",
+    "► click You're New Here",
+    "Plugins provide about pages that are also hidden from the sitemap but available from the origin on every site with the plugin installed or from collaborators.",
+    "► click About Flagmatic Plugin",
+    "► show lineup",
+    "Links from earlier panels replace to the right. Tests always click the rightmost of duplicated links.",
+    "► click Welcome Your Community",
+    "A link in a Reference is still resolved collaboratively with the referenced site in front of remote forks.",
+    "[[Link Dynamics]] considers mechanisms required.",
+    "► show 1 panel",
+    "► click Chorus of Voices",
+    "► show lineup",
+    "Click pragmas must match the case of the link text they intend to click. Those with no match are ignored.",
+    "► click how to wiki",
+    "Link text referring to [[A Non-Existant Page]] can be found and will fail when clicked.",
+    "► fail click A Non-Existant Page"
+  ], "small.fed.wiki")
   return new Response(JSON.stringify(json,null,2), { headers })
 }
