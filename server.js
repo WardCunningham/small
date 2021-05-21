@@ -68,6 +68,7 @@ function sitemap() {
     {"slug": "page-counter", "title": "Page Counter", date, synopsis},
     {"slug": "hello-chicago", "title": "Hello, Chicago", date, synopsis},
     {"slug": "hello-portland", "title": "Hello, Portland", date, synopsis},
+    {"slug": "test-link-click", "title": "Test Link Click", date, synopsis},
   ]
   return new Response(JSON.stringify(json,null,2), { headers })
 }
