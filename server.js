@@ -130,7 +130,7 @@ function test_link_click() {
     "We click through to newer documentation brought into the neighborhood with collaborative links.",
     "► click Field Guide to the Federation",
     "► click You're New Here",
-    "Plugins provide about pages that are also hidden from the sitemap but available from the origin on every site with the plugin installed or from collaborators.",
+    "Plugins provide about pages that awesome and are also hidden from the sitemap but available from the origin on every site with the plugin installed or from collaborators.",
     "► click About Flagmatic Plugin",
     "► show lineup",
     "Links from earlier panels replace to the right. Tests always click the rightmost of duplicated links.",
