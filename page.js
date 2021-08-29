@@ -1,4 +1,5 @@
 export { page, item }
+let date = Date.now()
 
 // from http://js.ward.asia.wiki.org/create-items-and-pages.html
 
@@ -14,7 +15,6 @@ function item (type, props) {
 }
 
 function action (type, props) {
-  let date = Date.now()
   return Object.assign({type, date}, props)
 }
 
