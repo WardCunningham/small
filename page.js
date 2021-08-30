@@ -1,5 +1,7 @@
 export { page, item }
-let date = Date.now()
+
+// copy(Date.now())
+let date = 1630354518927
 
 // from http://js.ward.asia.wiki.org/create-items-and-pages.html
 
