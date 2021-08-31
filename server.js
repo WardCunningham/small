@@ -61,7 +61,7 @@ function home() {
 }
 
 function sitemap() {
-  let date = Date.now()
+  let date = 1630354518927
   let synopsis = "A page constructed by a foreign federated server."
   let json = [
     {"slug": "wind-river", "title": "Wind River", date, synopsis},
